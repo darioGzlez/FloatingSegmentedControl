@@ -7,11 +7,11 @@
 import SwiftUI
 
 public struct FloatingSegmentedControlView: View {
-    @Binding var items: [String]
     @State private var widths: [CGFloat] = Array.init(repeating: 0, count: 100)
     @State private var selectedIndex: Int = 0
     @State private var buttomTapScale: CGFloat = 1
     
+    var items: [String]
     var onSelected: (Int) -> ()
     
     public var body: some View {
@@ -59,4 +59,13 @@ public struct FloatingSegmentedControlView: View {
         .shadow(radius: 10)
     }
     
+}
+
+extension FloatingSegmentedControlView {
+
+    public init(_ items: [String], onSelected: @escaping (Int) -> ()) {
+        self.items = items
+        self.onSelected = onSelected
+    }
+
 }
