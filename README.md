@@ -1,11 +1,20 @@
 <img src="https://i.imgur.com/kQJQLoK.png" width="400">
 
-> A SwiftUI package for a reusable floating picker, replicating the desing of the Photos.app
+> SwiftUI reusable implementation of the iOS 13 photos app picker.
 
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-## Requirements
+## :sparkles: Features
+
+- [x] Auto resizable view based on the number of items and the size of them.
+- [x] OnSelectedItem method to execute logic for item selection.
+
+## :open_book: Next features
+- [ ] Ability to customize the color of the bar, items and selector.
+- [ ] Customization of disable the drop shadow of the view.
+
+## :gear: Requirements
 
 - iOS 13+
 - Xcode 11+
@@ -14,7 +23,29 @@
 
 Using Swift Package Manager of Xcode, it can be install by going to `File -> Swift Packages -> Add Package Dependency` and pasting this url repository.
 
+```swift
+dependencies: [
+  .package(url: "https://github.com/darioGzlez/FloatingSegmentedControl.git", from: "1.0.0")
+]
+```
+
 ### Usage
+
+The floating segmented control takes two parameters, a string array being the elements to display and a function that takes an integer parameter to execute the code in the selection of the element.
+
+```swift
+public init(_ items: [String], onSelected: @escaping (Int) -> ()) {
+        self.items = items
+        self.onSelected = onSelected
+    }
+```
+
+## Demo app
+Simple app that uses de Floating Segmented Control to switch beetween satellite and standard modes for a MapView.
+
+Satellite view             |  Standard view
+:-------------------------:|:-------------------------:
+![Satellite view](https://i.imgur.com/QZsSSPB.png)  |  ![Standard view](https://i.imgur.com/ZmlsBZM.png)
 
 ```swift
 import FloatingSegmentedControl
@@ -47,5 +78,5 @@ struct ContentView: View {
 }
 ```
 
-### Licence
+## Licence
 FloatingSegmentedControl is under the MIT license. See the LICENSE file for more info.
