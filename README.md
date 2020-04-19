@@ -5,6 +5,8 @@
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+<img src="https://i.imgflip.com/3x98v4.gif">
+
 ## :sparkles: Features
 
 - [x] Auto resizable view based on the number of items and the size of them.
