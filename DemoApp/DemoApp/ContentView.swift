@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView(mapType: $mapType).edgesIgnoringSafeArea(.top)
+            MapView(mapType: $mapType).edgesIgnoringSafeArea(.vertical)
             VStack {
                 FloatingSegmentedControlView(items, onSelected: onSelected).padding(.top)
                 Spacer()
