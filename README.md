@@ -1,11 +1,11 @@
-<img src="https://i.imgur.com/38WTgKK.png" width="400">
+<img src="https://i.imgur.com/38WTgKK.png" width="500">
 
 > SwiftUI reusable implementation of the iOS 13 photos app picker.
 
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-<img src="https://i.imgflip.com/3x98v4.gif">
+<img src="https://s4.gifyu.com/images/heroGifHeader.gif">
 
 ## :sparkles: Features
 
@@ -45,9 +45,19 @@ public init(_ items: [String], onSelected: @escaping (Int) -> ()) {
 ## Demo app
 Simple app that uses de Floating Segmented Control to switch beetween satellite and standard modes for a MapView.
 
-Satellite view             |  Standard view
-:-------------------------:|:-------------------------:
-![Satellite view](https://i.imgur.com/QZsSSPB.png)  |  ![Standard view](https://i.imgur.com/ZmlsBZM.png)
+<table>
+  <tr>
+    <td>
+      <img src="https://i.imgur.com/QZsSSPB.png" width="360">
+    </td>
+    <td>
+      <img src="https://i.imgur.com/ZmlsBZM.png" width="360">
+    </td>
+    <td>
+      <img src="https://i.imgflip.com/3x98v4.gif" width="360">
+    </td>
+  </tr>
+ </table>
 
 ```swift
 import FloatingSegmentedControl
