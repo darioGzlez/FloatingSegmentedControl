@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FloatingSegmentedControl",
+        "repositoryURL": "https://github.com/darioGzlez/FloatingSegmentedControl",
+        "state": {
+          "branch": "master",
+          "revision": "6a99a79ef4be3d64cc3b372b18b85fabbbb78d83",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
