@@ -24,7 +24,7 @@ struct MapView: UIViewRepresentable {
     @Binding var mapType: MKMapType
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(mapType: $mapType)
+        Coordinator(mapType: $mapType)
     }
 
     func makeUIView(context: Context) -> MKMapView {
