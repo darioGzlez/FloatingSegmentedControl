@@ -10,7 +10,7 @@ import SwiftUI
 extension HorizontalAlignment {
     private enum UnderlineLeading: AlignmentID {
         static func defaultValue(in d: ViewDimensions) -> CGFloat {
-            return d[.leading]
+            d[.leading]
         }
     }
 

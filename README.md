@@ -9,7 +9,7 @@
 ## :sparkles: Features
 
 - [x] Auto resizable view based on the number of items and the size of them.
-- [x] OnSelectedItem method to execute logic for item selection.
+- [x] `OnSelectedItem` method to execute logic for item selection.
 
 ## :open_book: Next features
 - [ ] Ability to customize the color of the bar, items and selector.
@@ -22,7 +22,7 @@
 
 ### Installation
 
-Using Swift Package Manager of Xcode, it can be install by going to `File -> Swift Packages -> Add Package Dependency` and pasting this url repository.
+Using Xcode's Swift Package Manager, it can be installed by going to `File -> Swift Packages -> Add Package Dependency` and pasting the URL of this repository.
 
 ```swift
 dependencies: [
@@ -32,17 +32,18 @@ dependencies: [
 
 ### Usage
 
-The floating segmented control takes two parameters, a string array being the elements to display and a function that takes an integer parameter to execute the code in the selection of the element.
+The floating segmented control takes two parameters: a string array of the elements to display and a callback function that's given the selected element index.
 
 ```swift
-public init(_ items: [String], onSelected: @escaping (Int) -> ()) {
-        self.items = items
-        self.onSelected = onSelected
-    }
+public init(_ items: [String], title: String, onSelected: @escaping (Int) -> ()) {
+      self.items = items
+      self.title = title
+      self.onSelected = onSelected
+  }
 ```
 
 ## Demo app
-Simple app that uses de Floating Segmented Control to switch beetween satellite and standard modes for a MapView.
+Simple app that uses the Floating Segmented Control to switch beetween satellite and standard modes for a `MapView`.
 
 <table>
   <tr>
@@ -69,7 +70,11 @@ struct ContentView: View {
         ZStack {
             Map(mapType: $mapType).edgesIgnoringSafeArea(.top)
             VStack {
-                FloatingSegmentedControlView(items, onSelected: onSelected).padding(.top)
+                FloatingSegmentedControlView(
+                  items,
+                  title: "Map view",
+                  onSelected: onSelected)
+                  .padding(.top)
                 Spacer()
             }
         }

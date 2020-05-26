@@ -11,7 +11,7 @@ struct ItemView: View {
     var text: String
     
     var body: some View {
-        return Text(text)
+        Text(text)
             .font(.system(size: 15))
             .fontWeight(.semibold)
             .lineLimit(1)

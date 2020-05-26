@@ -11,14 +11,18 @@ import MapKit
 import FloatingSegmentedControl
 
 struct ContentView: View {
-    @State var items = ["Satellite", "Standad"]
+    @State var items = ["Satellite", "Standard"]
     @State var mapType: MKMapType = .hybrid
     
     var body: some View {
         ZStack {
             MapView(mapType: $mapType).edgesIgnoringSafeArea(.vertical)
             VStack {
-                FloatingSegmentedControlView(items, onSelected: onSelected).padding(.top)
+                FloatingSegmentedControlView(
+                    items,
+                    title: "Map view"
+                    onSelected: onSelected)
+                    .padding(.top)
                 Spacer()
             }
         }
