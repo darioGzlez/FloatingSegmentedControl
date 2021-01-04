@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 struct BlurView: UIViewRepresentable {
-    
+    var accentColor:UIColor
     var style: UIBlurEffect.Style = .systemMaterial
     
     func makeUIView(context: Context) -> UIVisualEffectView {
@@ -18,6 +18,7 @@ struct BlurView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
         uiView.effect = UIBlurEffect(style: style)
+        uiView.backgroundColor = accentColor
     }
     
 }

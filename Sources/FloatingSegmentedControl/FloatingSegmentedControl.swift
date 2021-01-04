@@ -11,7 +11,9 @@ public struct FloatingSegmentedControlView: View {
     @State private var widths: [CGFloat] = Array(repeating: 0, count: 100)
     @State private var selectedIndex: Int = 0
     @State private var buttomTapScale: CGFloat = 1
-    
+    var selectedText:UIColor = .gray
+    var accentColor:UIColor = .gray
+    var allowBlur:Bool = true
     var items: [String]
     var title: String
     var onSelected: (Int) -> ()
@@ -21,7 +23,7 @@ public struct FloatingSegmentedControlView: View {
             HStack(alignment: .center, spacing: 7) {
                 ForEach(self.items, id: \.self) { item in
                     ItemView(text: item)
-                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? .clear : .gray)
+                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? .clear : Color(selectedText))
                 }
             }
             .padding(.horizontal, 4.0)
@@ -37,7 +39,7 @@ public struct FloatingSegmentedControlView: View {
                         }
                     }
                 }) {
-                    DividerView(buttomTapScale: $buttomTapScale)
+                    DividerView(buttomTapScale: $buttomTapScale, allowBlur: allowBlur, backgroundColor: accentColor)
                 }
                 .alignmentGuide(.underlineLeading) { d in d[.leading]  }
                 .frame(width: widths[selectedIndex], height: 30)
@@ -58,7 +60,7 @@ public struct FloatingSegmentedControlView: View {
             .frame(height: 30)
         }
         .padding(.vertical, 4.0)
-        .background(BlurView(style: .systemMaterialLight))
+        .background(mainBackgroundView)
         .cornerRadius(16)
         .accessibilityElement(children: .ignore)
         .accessibility(label: Text("\(self.title)"))
@@ -81,19 +83,13 @@ public struct FloatingSegmentedControlView: View {
         }
         .shadow(radius: 10)
     }
-}
-
-extension FloatingSegmentedControlView {
-
-    /// Creates an instance that selects from `items` values.
-    public init(
-        _ items: [String],
-        title: String,
-        onSelected: @escaping (Int) -> ())
-    {
-        self.items = items
-        self.title = title
-        self.onSelected = onSelected
+    
+    var mainBackgroundView: some View {
+        if allowBlur {
+            return AnyView(BlurView(accentColor: accentColor , style: .systemMaterialLight))
+        }else{
+            return AnyView(Color(accentColor))
+        }
     }
-
 }
+
