@@ -14,6 +14,7 @@ public struct FloatingSegmentedControlView: View {
     var selectedText:UIColor
     var accentColor:UIColor
     var backgroundColor:UIColor
+    var textColor:UIColor
     var allowBlur:Bool
     var items: [String]
     var title: String
@@ -24,7 +25,7 @@ public struct FloatingSegmentedControlView: View {
             HStack(alignment: .center, spacing: 7) {
                 ForEach(self.items, id: \.self) { item in
                     ItemView(text: item)
-                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? .clear : Color(selectedText))
+                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? Color(textColor) : Color(selectedText))
                 }
             }
             .padding(.horizontal, 4.0)
@@ -106,7 +107,8 @@ extension FloatingSegmentedControlView {
         accentColor:UIColor = .gray,
         selectedTextColor:UIColor = .gray,
         allowBlur:Bool = true,
-        backgroundColor:UIColor = .lightGray
+        backgroundColor:UIColor = .lightGray,
+        textColor:UIColor = .clear
     )
     {
         self.items = items
@@ -116,6 +118,7 @@ extension FloatingSegmentedControlView {
         self.selectedText = selectedTextColor
         self.allowBlur = allowBlur
         self.backgroundColor = backgroundColor
+        self.textColor = textColor
     }
 
 }
