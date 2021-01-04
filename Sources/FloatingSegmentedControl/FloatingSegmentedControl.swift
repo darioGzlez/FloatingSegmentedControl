@@ -11,7 +11,7 @@ public struct FloatingSegmentedControlView: View {
     @State private var widths: [CGFloat] = Array(repeating: 0, count: 100)
     @State private var selectedIndex: Int = 0
     @State private var buttomTapScale: CGFloat = 1
-    var selectedText:UIColor
+    var selectedTextColor:UIColor
     var accentColor:UIColor
     var backgroundColor:UIColor
     var textColor:UIColor
@@ -25,7 +25,7 @@ public struct FloatingSegmentedControlView: View {
             HStack(alignment: .center, spacing: 7) {
                 ForEach(self.items, id: \.self) { item in
                     ItemView(text: item)
-                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? Color(textColor) : Color(selectedText))
+                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? Color(textColor) : Color(selectedTextColor))
                 }
             }
             .padding(.horizontal, 4.0)
@@ -51,7 +51,7 @@ public struct FloatingSegmentedControlView: View {
                 HStack(alignment: .center, spacing: 7) {
                     ForEach(self.items, id: \.self) { item in
                         ItemView(text: item)
-                            .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? .white : .clear)
+                            .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? Color(selectedTextColor) : Color(textColor))
                             .modifier(WidthUpdater(selectedIndex: self.$selectedIndex, widths: self.$widths, onSelected: self.onSelected, id: self.items.firstIndex(of: item)!))
                             .background(TextGeometryWidth())
                             .onPreferenceChange(WidthPreferenceKey.self, perform: { self.widths[self.items.firstIndex(of: item)!] = $0 })
@@ -115,7 +115,7 @@ extension FloatingSegmentedControlView {
         self.title = title
         self.onSelected = onSelected
         self.accentColor = accentColor
-        self.selectedText = selectedTextColor
+        self.selectedTextColor = selectedTextColor
         self.allowBlur = allowBlur
         self.backgroundColor = backgroundColor
         self.textColor = textColor
