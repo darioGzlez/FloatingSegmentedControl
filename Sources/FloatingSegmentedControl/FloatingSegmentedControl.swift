@@ -13,6 +13,7 @@ public struct FloatingSegmentedControlView: View {
     @State private var buttomTapScale: CGFloat = 1
     var selectedText:UIColor
     var accentColor:UIColor
+    var backgroundColor:UIColor
     var allowBlur:Bool
     var items: [String]
     var title: String
@@ -86,9 +87,9 @@ public struct FloatingSegmentedControlView: View {
     
     var mainBackgroundView: some View {
         if allowBlur {
-            return AnyView(BlurView(accentColor: accentColor , style: .systemMaterialLight))
+            return AnyView(BlurView(accentColor: backgroundColor , style: .systemMaterialLight))
         }else{
-            return AnyView(Color(accentColor))
+            return AnyView(Color(backgroundColor))
         }
     }
 }
@@ -104,7 +105,8 @@ extension FloatingSegmentedControlView {
         onSelected: @escaping (Int) -> (),
         accentColor:UIColor = .gray,
         selectedTextColor:UIColor = .gray,
-        allowBlur:Bool = true
+        allowBlur:Bool = true,
+        backgroundColor:UIColor = .lightGray
     )
     {
         self.items = items
@@ -113,6 +115,7 @@ extension FloatingSegmentedControlView {
         self.accentColor = accentColor
         self.selectedText = selectedTextColor
         self.allowBlur = allowBlur
+        self.backgroundColor = backgroundColor
     }
 
 }
