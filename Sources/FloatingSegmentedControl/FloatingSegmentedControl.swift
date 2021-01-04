@@ -11,9 +11,9 @@ public struct FloatingSegmentedControlView: View {
     @State private var widths: [CGFloat] = Array(repeating: 0, count: 100)
     @State private var selectedIndex: Int = 0
     @State private var buttomTapScale: CGFloat = 1
-    var selectedText:UIColor = .gray
-    var accentColor:UIColor = .gray
-    var allowBlur:Bool = true
+    var selectedText:UIColor
+    var accentColor:UIColor
+    var allowBlur:Bool
     var items: [String]
     var title: String
     var onSelected: (Int) -> ()
@@ -93,3 +93,26 @@ public struct FloatingSegmentedControlView: View {
     }
 }
 
+
+
+extension FloatingSegmentedControlView {
+
+    /// Creates an instance that selects from `items` values.
+    public init(
+        _ items: [String],
+        title: String,
+        onSelected: @escaping (Int) -> (),
+        accentColor:UIColor = .gray,
+        selectedTextColor:UIColor = .gray,
+        allowBlur:Bool = true
+    )
+    {
+        self.items = items
+        self.title = title
+        self.onSelected = onSelected
+        self.accentColor = accentColor
+        self.selectedText = selectedTextColor
+        self.allowBlur = allowBlur
+    }
+
+}
