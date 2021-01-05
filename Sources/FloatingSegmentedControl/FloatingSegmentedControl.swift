@@ -11,7 +11,11 @@ public struct FloatingSegmentedControlView: View {
     @State private var widths: [CGFloat] = Array(repeating: 0, count: 100)
     @State private var selectedIndex: Int = 0
     @State private var buttomTapScale: CGFloat = 1
-    
+    var selectedTextColor:UIColor
+    var accentColor:UIColor
+    var backgroundColor:UIColor
+    var textColor:UIColor
+    var allowBlur:Bool
     var items: [String]
     var title: String
     var onSelected: (Int) -> ()
@@ -21,7 +25,7 @@ public struct FloatingSegmentedControlView: View {
             HStack(alignment: .center, spacing: 7) {
                 ForEach(self.items, id: \.self) { item in
                     ItemView(text: item)
-                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? .clear : .gray)
+                        .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? Color(textColor) : Color(selectedTextColor))
                 }
             }
             .padding(.horizontal, 4.0)
@@ -37,7 +41,7 @@ public struct FloatingSegmentedControlView: View {
                         }
                     }
                 }) {
-                    DividerView(buttomTapScale: $buttomTapScale)
+                    DividerView(buttomTapScale: $buttomTapScale, allowBlur: allowBlur, backgroundColor: accentColor)
                 }
                 .alignmentGuide(.underlineLeading) { d in d[.leading]  }
                 .frame(width: widths[selectedIndex], height: 30)
@@ -47,7 +51,7 @@ public struct FloatingSegmentedControlView: View {
                 HStack(alignment: .center, spacing: 7) {
                     ForEach(self.items, id: \.self) { item in
                         ItemView(text: item)
-                            .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? .white : .clear)
+                            .foregroundColor(self.selectedIndex == self.items.firstIndex(of: item)! ? Color(selectedTextColor) : Color(textColor))
                             .modifier(WidthUpdater(selectedIndex: self.$selectedIndex, widths: self.$widths, onSelected: self.onSelected, id: self.items.firstIndex(of: item)!))
                             .background(TextGeometryWidth())
                             .onPreferenceChange(WidthPreferenceKey.self, perform: { self.widths[self.items.firstIndex(of: item)!] = $0 })
@@ -58,7 +62,7 @@ public struct FloatingSegmentedControlView: View {
             .frame(height: 30)
         }
         .padding(.vertical, 4.0)
-        .background(BlurView(style: .systemMaterialLight))
+        .background(mainBackgroundView)
         .cornerRadius(16)
         .accessibilityElement(children: .ignore)
         .accessibility(label: Text("\(self.title)"))
@@ -81,7 +85,17 @@ public struct FloatingSegmentedControlView: View {
         }
         .shadow(radius: 10)
     }
+    
+    var mainBackgroundView: some View {
+        if allowBlur {
+            return AnyView(BlurView(accentColor: backgroundColor , style: .systemMaterialLight))
+        }else{
+            return AnyView(Color(backgroundColor))
+        }
+    }
 }
+
+
 
 extension FloatingSegmentedControlView {
 
@@ -89,11 +103,22 @@ extension FloatingSegmentedControlView {
     public init(
         _ items: [String],
         title: String,
-        onSelected: @escaping (Int) -> ())
+        onSelected: @escaping (Int) -> (),
+        accentColor:UIColor = .gray,
+        selectedTextColor:UIColor = .gray,
+        allowBlur:Bool = true,
+        backgroundColor:UIColor = .lightGray,
+        textColor:UIColor = .clear
+    )
     {
         self.items = items
         self.title = title
         self.onSelected = onSelected
+        self.accentColor = accentColor
+        self.selectedTextColor = selectedTextColor
+        self.allowBlur = allowBlur
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
     }
 
 }
