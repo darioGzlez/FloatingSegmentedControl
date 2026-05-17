@@ -13,21 +13,23 @@ import FloatingSegmentedControl
 struct ContentView: View {
     @State var items = ["Satellite", "Standard"]
     @State var mapType: MKMapType = .hybrid
-    
+    @State var selectedIndex: Int = 0
+
     var body: some View {
         ZStack {
             MapView(mapType: $mapType).edgesIgnoringSafeArea(.vertical)
             VStack {
                 FloatingSegmentedControlView(
                     items,
-                    title: "Map view"
+                    title: "Map view",
+                    selectedIndex: $selectedIndex,
                     onSelected: onSelected)
                     .padding(.top)
                 Spacer()
             }
         }
     }
-    
+
     func onSelected(index: Int) {
         switch index {
         case 0:

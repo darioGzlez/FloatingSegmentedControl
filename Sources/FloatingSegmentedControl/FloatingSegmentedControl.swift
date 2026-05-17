@@ -9,7 +9,7 @@ import SwiftUI
 /// A control for selecting from a set of mutually exclusive values.
 public struct FloatingSegmentedControlView: View {
     @State private var widths: [CGFloat] = Array(repeating: 0, count: 100)
-    @State private var selectedIndex: Int = 0
+    @Binding var selectedIndex: Int
     @State private var buttomTapScale: CGFloat = 1
     var selectedTextColor:UIColor
     var accentColor:UIColor
@@ -100,10 +100,17 @@ public struct FloatingSegmentedControlView: View {
 extension FloatingSegmentedControlView {
 
     /// Creates an instance that selects from `items` values.
+    ///
+    /// - Parameters:
+    ///   - items: The options to display.
+    ///   - title: Accessibility label for the control.
+    ///   - selectedIndex: A binding to the currently selected index, enabling remote control from the parent view.
+    ///   - onSelected: Called with the new index whenever selection changes.
     public init(
         _ items: [String],
         title: String,
-        onSelected: @escaping (Int) -> (),
+        selectedIndex: Binding<Int>,
+        onSelected: @escaping (Int) -> () = { _ in },
         accentColor:UIColor = .gray,
         selectedTextColor:UIColor = .gray,
         allowBlur:Bool = true,
@@ -113,6 +120,7 @@ extension FloatingSegmentedControlView {
     {
         self.items = items
         self.title = title
+        self._selectedIndex = selectedIndex
         self.onSelected = onSelected
         self.accentColor = accentColor
         self.selectedTextColor = selectedTextColor
